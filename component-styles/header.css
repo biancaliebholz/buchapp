@@ -1,0 +1,33 @@
+.nav-logo{
+    height:100px;
+    width: auto;
+}
+
+.nav{
+    display:flex;
+    background: var(--dark);
+}
+
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  
+}
+
+
+
+.header-wave path {
+  fill: var(--dark);         
+
+}
+.header-wave{
+    width: 100%;
+}
+
+.main-header{
+    height: 150px;
+    width: 100%;
+} 
+
