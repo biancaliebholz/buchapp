@@ -173,3 +173,52 @@ let books = [
       ]
     }
   ]
+
+      
+  function renderBookCards() {
+  const cardsContainer = document.getElementById("book_cards");
+  let booksHtml = "";
+
+  for (let i = 0; i < books.length; i++) {
+    const book = books[i];
+
+    let commentsHTML = "";
+    if (book.comments.length === 0) {
+      commentsHTML = `<p class="no-comments">Noch keine Kommentare.</p>`;
+    } else {
+      for (let commentIndex = 0; commentIndex < book.comments.length; commentIndex++) {
+        const comment = book.comments[commentIndex];
+        commentsHTML += `
+          <li>
+            ${comment.name}${comment.comment}
+          </li>
+        `;
+      }
+      commentsHTML = `<ul class="comments-list">${commentsHTML}</ul>`;
+    }
+
+
+    booksHtml += `
+      <article class="book-card">
+        <h3 class="book-title">${book.name}</h3>
+
+        <ul class="book-meta">
+          <li><strong>Autor:</strong> ${book.author}</li>
+          <li><strong>Likes:</strong> ${book.likes} </li>
+          <li><strong>Preis:</strong> ${book.price.toFixed(2)} €</li>
+          <li><strong>Jahr:</strong> ${book.publishedYear}</li>
+          <li><strong>Genre:</strong> ${book.genre}</li>
+        </ul>
+
+        <div class="book-comments">
+          <h4>Kommentare (${book.comments.length})</h4>
+          <div class="comments-scroll">
+            ${commentsHTML}
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  cardsContainer.innerHTML = booksHtml;
+}
