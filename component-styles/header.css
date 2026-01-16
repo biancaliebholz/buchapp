@@ -1,33 +1,79 @@
 .nav-logo{
-    height:100px;
+    height: 60px;
     width: auto;
+
 }
 
 .nav{
     display:flex;
     background: var(--dark);
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
 }
 
 
 .nav-links {
   display: flex;
+  gap: 40px;
   align-items: center;
-  gap: 30px;
   
 }
 
-
-
-.header-wave path {
-  fill: var(--dark);         
-
+.nav-links a {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--light);
 }
-.header-wave{
-    width: 100%;
-}
+
+
 
 .main-header{
-    height: 150px;
     width: 100%;
 } 
 
+.login-btn {
+  background: linear-gradient(135deg, #FFC107, #FF9800);
+  color: #0F172A;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+ 
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Nur normale Links */
+.nav-links a:not(.login-btn) {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* Linie */
+.nav-links a:not(.login-btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background: #FFC107;
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+/* Active immer sichtbar */
+.nav-links a:not(.login-btn).active::after {
+  width: 100%;
+}
+
+/* Hover zeigt Linie zusätzlich */
+.nav-links a:not(.login-btn):hover::after {
+  width: 100%;
+}
