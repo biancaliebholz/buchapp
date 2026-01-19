@@ -213,7 +213,7 @@ let books = [
       commentsHTML = renderUlComments(commentList);
     }
 
-    booksHtml += renderBooksHtml(book, commentsHTML, likeHeart);
+    booksHtml += renderBooksHtml(book, commentsHTML, likeHeart, i);
   }
 
   cardsContainer.innerHTML = booksHtml;
@@ -236,7 +236,7 @@ function renderUlComments(commentList){
 return`<ul class="comments-list">${commentList}</ul>`;
         }
 
-        function renderBooksHtml(book, commentsHTML, likeHeart) {
+        function renderBooksHtml(book, commentsHTML, likeHeart, index) {
   return `
     <article class="book-card">
       <img
@@ -259,12 +259,24 @@ return`<ul class="comments-list">${commentList}</ul>`;
         <li><strong>Genre:</strong> ${book.genre}</li>
       </ul>
 
-      <div class="book-comments">
-        <h4>Kommentare (${book.comments.length})</h4>
-        <div class="comments-scroll">
-          ${commentsHTML}
-        </div>
-      </div>
+     <div class="book-comments">
+  <h4>Kommentare (${book.comments.length})</h4>
+
+  <div class="comments-scroll">
+    ${commentsHTML}
+  </div>
+
+  <div class="comment-form">
+    <input 
+      id="comment-input-${index}" 
+      type="text" 
+      placeholder="Dein Kommentar..."
+    >
+    <button onclick="addComment(${index})">
+      Senden
+    </button>
+  </div>
+</div>
     </article>
   `;
 }
@@ -301,6 +313,25 @@ function toggleLike(index) {
     book.liked = true;
     book.likes = book.likes + 1;
   }
+
+  renderBookCards();
+}
+
+function addComment(bookIndex) {
+  const input = document.getElementById(`comment-input-${bookIndex}`);
+  const text = input.value;
+
+  if (text === "") {
+    return;
+  }
+
+  const newComment = {
+    name: "Du",
+    comment: text
+  };
+
+  books[bookIndex].comments.push(newComment);
+  input.value = "";
 
   renderBookCards();
 }

@@ -1,0 +1,16 @@
+.main-footer {
+  background: var(--dark);
+  color: var(--light);
+  padding: 44px 16px;
+  margin-top: 80px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content p {
+  font-size: 14px;
+}

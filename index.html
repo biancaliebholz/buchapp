@@ -9,24 +9,32 @@
     <link rel="stylesheet" href="./component-styles/header.css">
     <link rel="stylesheet" href="./component-styles/hero-styles.css">
     <link rel="stylesheet" href="./component-styles/bookcards.css">
+    <link rel="stylesheet" href="./component-styles/footer.css">
 </head>
 <body onload="renderBookCards()">
 
-    <header class="main-header">
-    <nav class="nav">
+  <header class="main-header">
+  <nav class="nav">
 
-       <img class="nav-logo" src="./assets/png/bookhive_logo_header.png" alt=""> 
-    
-      <ul class="nav-links">
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">Bücher</a></li>
-        <li><a href="#">Community</a></li>
-        <li><a href="#" class="login-btn">Jetzt einloggen</a></li>
-      </ul>
+    <img class="nav-logo" src="./assets/png/bookhive_logo_header.png" alt="">
 
-    </nav>
+    <button id="navToggle"
+            class="nav-toggle"
+            type="button"
+            aria-controls="navLinks"
+            aria-expanded="false">
+      ☰
+    </button>
+
+    <ul id="navLinks" class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Bücher</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="#" class="login-btn">Jetzt einloggen</a></li>
+    </ul>
+
+  </nav>
 </header>
-
 
 <section class="hero">
   <img class="hero-img" src="./assets/pictures/hero-picture.jpg" alt="" aria-hidden="true">
@@ -47,6 +55,14 @@
 </div>
 </section>
 
+
+<footer class="main-footer">
+  <div class="footer-content">
+    <p>© 2026 BookHive — Dein Bienenstock für Bücher</p>
+  </div>
+</footer>
+
     <script src="./script.js"></script>
+    <script src="./js/header.js"></script>
 </body>
 </html>

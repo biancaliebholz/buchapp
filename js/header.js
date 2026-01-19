@@ -1,7 +1,16 @@
-const toggleBtn = document.getElementById("nav-toggle");
-const navLinks = document.getElementById("nav-links");
+function initBurgerMenu() {
+  const toggleBtn = document.getElementById("navToggle");
+  const navLinks = document.getElementById("navLinks");
 
-toggleBtn.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("is-open");
-  toggleBtn.setAttribute("aria-expanded", isOpen);
-});
+  toggleBtn.addEventListener("click", function () {
+
+    if (navLinks.classList.contains("is-open")) {
+      navLinks.classList.remove("is-open");
+    } else {
+      navLinks.classList.add("is-open");
+    }
+
+  });
+}
+
+initBurgerMenu();
