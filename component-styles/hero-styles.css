@@ -68,12 +68,17 @@
     transform: none;
     width: 100%;
     max-width: 100%;
-    padding: 16px;
     text-align: center;
     align-items: center;
   }
 
   .hero-content .cta{
     align-self: center;
+  }
+}
+
+@media (min-width: 1460px){
+  .hero-content{
+    left: calc((100% - 1460px) / 2 + 30px);
   }
 }

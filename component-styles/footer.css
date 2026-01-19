@@ -1,8 +1,8 @@
 .main-footer {
   background: var(--dark);
   color: var(--light);
-  padding: 44px 16px;
-  margin-top: 80px;
+  padding: 64px 16px;
+  margin-top: 20px;
 }
 
 .footer-content {
@@ -12,5 +12,5 @@
 }
 
 .footer-content p {
-  font-size: 14px;
+  font-size: 16px;
 }

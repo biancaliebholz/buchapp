@@ -330,7 +330,7 @@ function addComment(bookIndex) {
     comment: text
   };
 
-  books[bookIndex].comments.push(newComment);
+  books[bookIndex].comments.unshift(newComment);
   input.value = "";
 
   renderBookCards();
