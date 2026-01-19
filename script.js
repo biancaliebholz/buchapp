@@ -185,60 +185,122 @@ let books = [
   ]
 
       
-  function renderBookCards() {
+ function renderBookCards() {
   const cardsContainer = document.getElementById("book_cards");
   let booksHtml = "";
-
+  
   for (let i = 0; i < books.length; i++) {
     const book = books[i];
+    
+    let likeHeart ="";
+       if (book.liked === true){
+        likeHeart = renderHeart(i);
+      } else {
+        likeHeart = renderNoHeart(i);
+      }
 
     let commentsHTML = "";
     if (book.comments.length === 0) {
-      commentsHTML = `<p class="no-comments">Noch keine Kommentare.</p>`;
+      commentsHTML = renderNoComments();
     } else {
-      for (let commentIndex = 0; commentIndex < book.comments.length; commentIndex++) {
+      let commentList = "";
+
+
+    for (let commentIndex = 0; commentIndex < book.comments.length; commentIndex++) {
         const comment = book.comments[commentIndex];
-        commentsHTML += `
-          <li>
-           <strong> ${comment.name}:</strong> ${comment.comment}
-          </li>
-        `;
+        commentList += renderComments(comment);
       }
-      commentsHTML = `<ul class="comments-list">${commentsHTML}</ul>`;
+      commentsHTML = renderUlComments(commentList);
     }
 
-
-    booksHtml += `
-      <article class="book-card">
-         <img
-      class="book-cover"
-      src="./assets/cover-pictures/${book.cover}"
-      alt="Cover von ${book.name}"
-      loading="lazy"
-    />
-
-    
-        <h3 class="book-title">${book.name}</h3>
-
-        <ul class="book-meta">
-          <li><strong>Autor:</strong> ${book.author}</li>
-          <li><strong>Likes:</strong> ${book.likes} </li>
-          <li><strong>Preis:</strong> ${book.price.toFixed(2)} €</li>
-          <li><strong>Jahr:</strong> ${book.publishedYear}</li>
-          <li><strong>Genre:</strong> ${book.genre}</li>
-        </ul>
-
-        <div class="book-comments">
-          <h4>Kommentare (${book.comments.length})</h4>
-          <div class="comments-scroll">
-            ${commentsHTML}
-          </div>
-        </div>
-      </article>
-    `;
+    booksHtml += renderBooksHtml(book, commentsHTML, likeHeart);
   }
 
   cardsContainer.innerHTML = booksHtml;
 }
 
 
+
+
+function renderNoComments(){
+return`<p class="no-comments">Noch keine Kommentare.</p>`
+}
+
+function renderComments(comment){
+return` <li>
+           <strong> ${comment.name}:</strong> ${comment.comment}
+          </li>
+        `}
+
+function renderUlComments(commentList){
+return`<ul class="comments-list">${commentList}</ul>`;
+        }
+
+        function renderBooksHtml(book, commentsHTML, likeHeart) {
+  return `
+    <article class="book-card">
+      <img
+        class="book-cover"
+        src="./assets/cover-pictures/${book.cover}"
+        alt="Cover von ${book.name}"
+        loading="lazy"
+      />
+
+      <h3 class="book-title">${book.name}</h3>
+
+      <ul class="book-meta">
+          <li class="likes-row">
+          <strong>Likes:</strong> ${book.likes}
+          ${likeHeart}
+        </li>
+        <li><strong>Autor:</strong> ${book.author}</li>
+        <li><strong>Preis:</strong> ${book.price.toFixed(2)} €</li>
+        <li><strong>Jahr:</strong> ${book.publishedYear}</li>
+        <li><strong>Genre:</strong> ${book.genre}</li>
+      </ul>
+
+      <div class="book-comments">
+        <h4>Kommentare (${book.comments.length})</h4>
+        <div class="comments-scroll">
+          ${commentsHTML}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderHeart(index) {
+  return `
+    <img 
+      class="like-icon" 
+      src="./assets/icons/like.PNG" 
+      alt="geliked"
+      onclick="toggleLike(${index})"
+    >
+  `;
+}
+
+function renderNoHeart(index) {
+  return `
+    <img 
+      class="like-icon" 
+      src="./assets/icons/nolike.PNG" 
+      alt="nicht geliked"
+      onclick="toggleLike(${index})"
+    >
+  `;
+}
+
+function toggleLike(index) {
+  const book = books[index];
+
+  if (book.liked === true) {
+    book.liked = false;
+    book.likes = book.likes - 1;
+  } else {
+    book.liked = true;
+    book.likes = book.likes + 1;
+  }
+
+  renderBookCards();
+}

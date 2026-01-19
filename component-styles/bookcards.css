@@ -114,6 +114,26 @@
     border-radius: 10px;
 }
 
+
+.likes-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.like-icon {
+  width: auto;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+
+.like-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
 @media (max-width: 600px){
   .books{
     padding: 50px 14px;
