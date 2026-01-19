@@ -1,3 +1,4 @@
+
 let books = [
     {
       "name": "Die Geheimnisse des Ozeans",
@@ -7,6 +8,7 @@ let books = [
       "price": 19.99,
       "publishedYear": 2018,
       "genre": "Fantasy",
+      "cover":"geheimnisse-des-ozeans.PNG",
       "comments": [
         {
           "name": "Leser123",
@@ -38,6 +40,7 @@ let books = [
       "price": 14.50,
       "publishedYear": 2021,
       "genre": "Fantasy",
+       "cover":"der-vergessene-pfad.PNG",
       "comments": []
     },
     {
@@ -48,6 +51,7 @@ let books = [
       "price": 22.95,
       "publishedYear": 2019,
       "genre": "Romantik",
+      "cover":"die-farben-des-himmels.PNG",
       "comments": [
         {
           "name": "LeserPeter",
@@ -79,6 +83,7 @@ let books = [
       "price": 18.00,
       "publishedYear": 2020,
       "genre": "Science-Fiction",
+       "cover":"das-rätsel-der-zeit.PNG",
       "comments": [
         {
           "name": "BuchKenner",
@@ -98,6 +103,7 @@ let books = [
       "price": 16.75,
       "publishedYear": 2017,
       "genre": "Fantasy",
+       "cover":"der-letzte-wächter.PNG",
       "comments": []
     },
     {
@@ -108,6 +114,7 @@ let books = [
       "price": 12.30,
       "publishedYear": 2022,
       "genre": "Science-Fiction",
+      "cover":"im-schatten-des-mondes.PNG",
       "comments": [
         {
           "name": "BücherLiebhaber",
@@ -127,6 +134,7 @@ let books = [
       "price": 21.00,
       "publishedYear": 2015,
       "genre": "Science-Fiction",
+       "cover":"jenseits-der-sterne.PNG",
       "comments": [
         {
           "name": "Leser123",
@@ -142,6 +150,7 @@ let books = [
       "price": 17.50,
       "publishedYear": 2020,
       "genre": "Fantasy",
+       "cover":"das-verborgene-königreich.PNG",
       "comments": [
         {
           "name": "Bookworm92",
@@ -157,6 +166,7 @@ let books = [
       "price": 19.99,
       "publishedYear": 2016,
       "genre": "Romantik",
+       "cover":"liebe-in-zeiten-des-krieges.PNG",
       "comments": [
         {
           "name": "Bibliophile23",
@@ -190,7 +200,7 @@ let books = [
         const comment = book.comments[commentIndex];
         commentsHTML += `
           <li>
-            ${comment.name}${comment.comment}
+           <strong> ${comment.name}:</strong> ${comment.comment}
           </li>
         `;
       }
@@ -200,6 +210,14 @@ let books = [
 
     booksHtml += `
       <article class="book-card">
+         <img
+      class="book-cover"
+      src="./assets/cover-pictures/${book.cover}"
+      alt="Cover von ${book.name}"
+      loading="lazy"
+    />
+
+    
         <h3 class="book-title">${book.name}</h3>
 
         <ul class="book-meta">
@@ -222,3 +240,5 @@ let books = [
 
   cardsContainer.innerHTML = booksHtml;
 }
+
+
