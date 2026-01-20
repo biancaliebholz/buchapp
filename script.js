@@ -83,7 +83,7 @@ let books = [
       "price": 18.00,
       "publishedYear": 2020,
       "genre": "Science-Fiction",
-       "cover":"das-rätsel-der-zeit.PNG",
+       "cover":"das-raetsel-der-zeit.PNG",
       "comments": [
         {
           "name": "BuchKenner",
@@ -103,7 +103,7 @@ let books = [
       "price": 16.75,
       "publishedYear": 2017,
       "genre": "Fantasy",
-       "cover":"der-letzte-wächter.PNG",
+       "cover":"der-letzte-waechter.PNG",
       "comments": []
     },
     {
@@ -150,7 +150,7 @@ let books = [
       "price": 17.50,
       "publishedYear": 2020,
       "genre": "Fantasy",
-       "cover":"das-verborgene-königreich.PNG",
+       "cover":"das-verborgene-koenigreich.PNG",
       "comments": [
         {
           "name": "Bookworm92",
