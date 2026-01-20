@@ -28,7 +28,7 @@ Das Projekt wurde im Rahmen meiner Frontend-Weiterbildung mit HTML, CSS und Java
 
 ## 🚀 Demo
 
-👉 Live Demo: *(Hier deine GitHub-Pages-URL einfügen)*
+👉 Live Demo: https://biancaliebholz.developerakademie.net/buchapp/
 
 ---
 
