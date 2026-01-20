@@ -83,7 +83,7 @@ let books = [
       "price": 18.00,
       "publishedYear": 2020,
       "genre": "Science-Fiction",
-       "cover":"das-raetsel-der-zeit.PNG",
+       "cover":"das-raetsel-der-zeit.png",
       "comments": [
         {
           "name": "BuchKenner",
