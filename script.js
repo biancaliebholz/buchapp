@@ -238,7 +238,7 @@ return`<ul class="comments-list">${commentList}</ul>`;
 
         function renderBooksHtml(book, commentsHTML, likeHeart, index) {
   return `
-    <article class="book-card">
+    <article class="book-card" id="book-card-${index}">
       <img
         class="book-cover"
         src="./assets/cover-pictures/${book.cover}"
@@ -271,6 +271,7 @@ return`<ul class="comments-list">${commentList}</ul>`;
       id="comment-input-${index}" 
       type="text" 
       placeholder="Dein Kommentar..."
+      aria-label="Kommentar für ${book.name}"
     >
     <button onclick="addComment(${index})">
       Senden
@@ -283,23 +284,17 @@ return`<ul class="comments-list">${commentList}</ul>`;
 
 function renderHeart(index) {
   return `
-    <img 
-      class="like-icon" 
-      src="./assets/icons/like.PNG" 
-      alt="geliked"
-      onclick="toggleLike(${index})"
-    >
+    <button class="like-btn" type="button" onclick="toggleLike(${index})" aria-label="Like entfernen">
+      <img class="like-icon" src="./assets/icons/like.PNG" alt="geliked">
+    </button>
   `;
 }
 
 function renderNoHeart(index) {
   return `
-    <img 
-      class="like-icon" 
-      src="./assets/icons/nolike.PNG" 
-      alt="nicht geliked"
-      onclick="toggleLike(${index})"
-    >
+    <button class="like-btn" type="button" onclick="toggleLike(${index})" aria-label="Like setzen">
+      <img class="like-icon" src="./assets/icons/nolike.PNG" alt="nicht geliked">
+    </button>
   `;
 }
 

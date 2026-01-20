@@ -136,6 +136,10 @@
   cursor: pointer;
   
 }
+.like-btn{
+  background: transparent;
+  border: none;
+}
 
 
 .like-icon:hover {
