@@ -184,59 +184,76 @@ let books = [
     }
   ]
 
-      
- function renderBookCards() {
+  
+function renderBookCards() {
   const cardsContainer = document.getElementById("book_cards");
   let booksHtml = "";
-  
+
   for (let i = 0; i < books.length; i++) {
-    const book = books[i];
-    
-    let likeHeart ="";
-       if (book.liked === true){
-        likeHeart = renderHeart(i);
-      } else {
-        likeHeart = renderNoHeart(i);
-      }
-
-    let commentsHTML = "";
-    if (book.comments.length === 0) {
-      commentsHTML = renderNoComments();
-    } else {
-      let commentList = "";
-
-
-    for (let commentIndex = 0; commentIndex < book.comments.length; commentIndex++) {
-        const comment = book.comments[commentIndex];
-        commentList += renderComments(comment);
-      }
-      commentsHTML = renderUlComments(commentList);
-    }
-
-    booksHtml += renderBooksHtml(book, commentsHTML, likeHeart, i);
+    booksHtml += renderSingleBookCard(i);
   }
 
   cardsContainer.innerHTML = booksHtml;
 }
 
 
+function renderSingleBookCard(index) {
+  const book = books[index];
 
+  const likeHeart = getLikeButtonHtml(index, book.liked); 
+  const commentsHTML = getCommentsHtml(book.comments);    
 
-function renderNoComments(){
-return`<p class="no-comments">Noch keine Kommentare.</p>`
+  return renderBooksHtml(book, commentsHTML, likeHeart, index);
 }
 
-function renderComments(comment){
-return` <li>
-           <strong> ${comment.name}:</strong> ${comment.comment}
-          </li>
-        `}
+function getLikeButtonHtml(index, liked) {
+  if (liked === true) {
+    return renderHeart(index);
+  }
+  return renderNoHeart(index);
+}
 
-function renderUlComments(commentList){
-return`<ul class="comments-list">${commentList}</ul>`;
-        }
+function getCommentsHtml(comments) {
+  if (comments.length === 0) {
+    return renderNoComments();
+  }
 
-        function renderBooksHtml(book, commentsHTML, likeHeart, index) {
+  let commentList = "";
+  for (let i = 0; i < comments.length; i++) {
+    commentList += renderComments(comments[i]);
+  }
+  return renderUlComments(commentList);
+}
+
+
+
+function updateLikeUI(index) {
+  const book = books[index];
+
+ 
+  const likesTextEl = document.getElementById(`likes-count-${index}`);
+  if (likesTextEl) likesTextEl.textContent = book.likes;
+
+ 
+  const likeContainer = document.getElementById(`like-container-${index}`);
+  if (likeContainer) likeContainer.innerHTML = getLikeButtonHtml(index, book.liked);
+}
+
+function updateCommentsUI(index) {
+  const book = books[index];
+
+
+  const headline = document.getElementById(`comments-headline-${index}`);
+  if (headline) headline.textContent = `Kommentare (${book.comments.length})`;
+
+  
+  const listContainer = document.getElementById(`comments-container-${index}`);
+  if (listContainer) listContainer.innerHTML = getCommentsHtml(book.comments);
+}
+
+
+
+function renderBooksHtml(book, commentsHTML, likeHeart, index) {
   return `
     <article class="book-card" id="book-card-${index}">
       <img
@@ -249,37 +266,58 @@ return`<ul class="comments-list">${commentList}</ul>`;
       <h3 class="book-title">${book.name}</h3>
 
       <ul class="book-meta">
-          <li class="likes-row">
-          <strong>Likes:</strong> ${book.likes}
-          ${likeHeart}
+        <li class="likes-row">
+          <strong>Likes:</strong>
+          <span id="likes-count-${index}">${book.likes}</span>
+
+          <span id="like-container-${index}">
+            ${likeHeart}
+          </span>
         </li>
+
         <li><strong>Autor:</strong> ${book.author}</li>
         <li><strong>Preis:</strong> ${book.price.toFixed(2)} €</li>
         <li><strong>Jahr:</strong> ${book.publishedYear}</li>
         <li><strong>Genre:</strong> ${book.genre}</li>
       </ul>
 
-     <div class="book-comments">
-  <h4>Kommentare (${book.comments.length})</h4>
+      <div class="book-comments">
+        <h4 id="comments-headline-${index}">Kommentare (${book.comments.length})</h4>
 
-  <div class="comments-scroll">
-    ${commentsHTML}
-  </div>
+        <div class="comments-scroll" id="comments-container-${index}">
+          ${commentsHTML}
+        </div>
 
-  <div class="comment-form">
-    <input 
-      id="comment-input-${index}" 
-      type="text" 
-      placeholder="Dein Kommentar..."
-      aria-label="Kommentar für ${book.name}"
-    >
-    <button onclick="addComment(${index})">
-      Senden
-    </button>
-  </div>
-</div>
+        <div class="comment-form">
+          <input 
+            id="comment-input-${index}" 
+            type="text" 
+            placeholder="Dein Kommentar..."
+            aria-label="Kommentar für ${book.name}"
+          >
+          <button type="button" onclick="addComment(${index})">
+            Senden
+          </button>
+        </div>
+      </div>
     </article>
   `;
+}
+
+function renderNoComments() {
+  return `<p class="no-comments">Noch keine Kommentare.</p>`;
+}
+
+function renderComments(comment) {
+  return `
+    <li>
+      <strong>${comment.name}:</strong> ${comment.comment}
+    </li>
+  `;
+}
+
+function renderUlComments(commentList) {
+  return `<ul class="comments-list">${commentList}</ul>`;
 }
 
 function renderHeart(index) {
@@ -298,6 +336,8 @@ function renderNoHeart(index) {
   `;
 }
 
+
+
 function toggleLike(index) {
   const book = books[index];
 
@@ -309,24 +349,22 @@ function toggleLike(index) {
     book.likes = book.likes + 1;
   }
 
-  renderBookCards();
+  updateLikeUI(index); 
 }
 
-function addComment(bookIndex) {
-  const input = document.getElementById(`comment-input-${bookIndex}`);
-  const text = input.value;
+function addComment(index) {
+  const input = document.getElementById(`comment-input-${index}`);
+  const text = input.value.trim();
 
-  if (text === "") {
-    return;
-  }
+  if (text === "") return;
 
   const newComment = {
     name: "Du",
     comment: text
   };
 
-  books[bookIndex].comments.unshift(newComment);
+  books[index].comments.unshift(newComment);
   input.value = "";
 
-  renderBookCards();
+  updateCommentsUI(index); 
 }
